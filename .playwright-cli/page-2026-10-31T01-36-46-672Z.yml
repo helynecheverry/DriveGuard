@@ -1,0 +1,207 @@
+- generic [ref=f4e2]:
+  - link "Skip to main content" [ref=f4e3] [cursor=pointer]:
+    - /url: "#stMain"
+  - region "Sidebar" [ref=f4e7]:
+    - generic [ref=f4e12]:
+      - generic [ref=f4e17]:
+        - generic [ref=f4e18]: ◉
+        - generic [ref=f4e19]:
+          - strong [ref=f4e20]: DriveGuard
+          - generic [ref=f4e21]: DRIVER SAFETY LAB
+      - generic [ref=f4e22]: ● API conectada
+      - generic [ref=f4e27]: ● MongoDB conectado
+      - heading "Conductor" [level=3] [ref=f4e36]
+      - generic [ref=f4e38]:
+        - generic [ref=f4e39]:
+          - paragraph [ref=f4e42]: Conductor activo
+          - button "Help for Conductor activo" [ref=f4e46] [cursor=pointer]
+        - group [ref=f4e51]:
+          - combobox "Conductor activo" [ref=f4e52]: — Sin seleccionar —
+          - button "Open" [ref=f4e53] [cursor=pointer]
+      - button [ref=f4e59] [cursor=pointer]:
+        - paragraph [ref=f4e64]: ↻ Actualizar lista
+      - heading "Ubicación de la sesión" [level=3] [ref=f4e69]
+      - generic [ref=f4e71]:
+        - paragraph [ref=f4e75]: Descripción
+        - textbox "Descripción" [ref=f4e78]:
+          - /placeholder: Vía Pasto - Ipiales, km 12
+      - generic [ref=f4e80]:
+        - generic [ref=f4e84]:
+          - paragraph [ref=f4e88]: Latitud
+          - spinbutton "Latitud" [ref=f4e91]
+        - generic [ref=f4e95]:
+          - paragraph [ref=f4e99]: Longitud
+          - spinbutton "Longitud" [ref=f4e102]
+      - paragraph [ref=f4e107]: Se incluye en el mensaje de emergencia. En el prototipo se ingresa a mano.
+  - generic [ref=f4e4]:
+    - banner [ref=f4e110]:
+      - generic [ref=f4e113]:
+        - button "Deploy" [ref=f4e327] [cursor=pointer]
+        - button "Main menu" [ref=f4e115] [cursor=pointer]
+    - main [ref=f4e5]:
+      - generic [ref=f4e119]:
+        - generic [ref=f4e124]:
+          - text: CENTRO DE MONITOREO · DRIVEGUARD LAB
+          - heading "Cada mirada cuenta." [level=1] [ref=f4e126]:
+            - text: Cada mirada cuenta.
+            - generic [ref=f4e127]:
+              - link "Link to heading":
+                - /url: "#cada-mirada-cuenta"
+          - paragraph [ref=f4e128]: Un espacio para ajustar la detección, seguir tu atención y entender las señales de cada sesión.
+        - generic [ref=f4e130]:
+          - generic [ref=f4e135]:
+            - paragraph [ref=f4e139]: Conductor activo
+            - paragraph [ref=f4e142]: Sin seleccionar
+          - generic [ref=f4e147]:
+            - paragraph [ref=f4e151]: Detección de ojos
+            - paragraph [ref=f4e154]: Automática
+          - generic [ref=f4e159]:
+            - paragraph [ref=f4e163]: Factor de calibración
+            - paragraph [ref=f4e166]: 75 %
+        - generic [ref=f4e168]:
+          - tablist [ref=f4e169]:
+            - tab [ref=f4e170] [cursor=pointer]:
+              - paragraph [ref=f4e172]: Conductor
+            - tab [active] [selected] [ref=f4e174] [cursor=pointer]:
+              - paragraph [ref=f4e176]: Ojos y calibración
+            - tab [ref=f4e177] [cursor=pointer]:
+              - paragraph [ref=f4e179]: Monitoreo en vivo
+            - tab [ref=f4e180] [cursor=pointer]:
+              - paragraph [ref=f4e182]: Video de prueba
+            - tab [ref=f4e183] [cursor=pointer]:
+              - paragraph [ref=f4e185]: Historial
+            - tab [ref=f4e186] [cursor=pointer]:
+              - paragraph [ref=f4e188]: Configuración
+          - tabpanel "Ojos y calibración" [ref=f4e331]:
+            - generic [ref=f4e332]:
+              - heading "Ojos y calibración" [level=3] [ref=f4e337]:
+                - text: Ojos y calibración
+                - generic [ref=f4e338]:
+                  - link "Link to heading":
+                    - /url: "#ojos-y-calibracion"
+              - paragraph [ref=f4e343]: Ajusta la detección a tu mirada y comprueba cómo responde a distintas aperturas.
+              - generic [ref=f4e345]:
+                - generic [ref=f4e349]:
+                  - heading "01 / SENSIBILIDAD DE DETECCIÓN" [level=5] [ref=f4e355]:
+                    - text: 01 / SENSIBILIDAD DE DETECCIÓN
+                    - generic [ref=f4e356]:
+                      - link "Link to heading":
+                        - /url: "#01-sensibilidad-de-deteccion"
+                  - generic [ref=f4e358]:
+                    - generic [ref=f4e359]:
+                      - paragraph [ref=f4e362]: ¿Cómo definir el cierre del ojo?
+                      - button "Help for ¿Cómo definir el cierre del ojo?" [ref=f4e366] [cursor=pointer]
+                    - radiogroup "¿Cómo definir el cierre del ojo?" [ref=f4e370]:
+                      - generic [ref=f4e372] [cursor=pointer]:
+                        - radio "Automático" [checked] [ref=f4e374]
+                        - paragraph [ref=f4e379]: Automático
+                      - generic [ref=f4e381] [cursor=pointer]:
+                        - radio "Manual" [ref=f4e383]
+                        - paragraph [ref=f4e387]: Manual
+                  - generic [ref=f4e390]:
+                    - paragraph [ref=f4e394]: Sensibilidad respecto a tu apertura habitual
+                    - group "Sensibilidad respecto a tu apertura habitual" [ref=f4e395]:
+                      - generic [ref=f4e396]:
+                        - generic [ref=f4e397]:
+                          - slider "Sensibilidad respecto a tu apertura habitual Sensibilidad respecto a tu apertura habitual" [ref=f4e399]: "0.75"
+                          - generic:
+                            - generic:
+                              - paragraph: "0.75"
+                        - generic:
+                          - generic:
+                            - paragraph: "0.50"
+                          - generic:
+                            - paragraph: "0.95"
+                  - paragraph [ref=f4e404]: El cierre se detectará por debajo del 75 % de tu EAR base. La cámara medirá esa base al calibrar.
+                  - generic [ref=f4e406]:
+                    - generic [ref=f4e407]:
+                      - paragraph [ref=f4e410]: Duración de calibración (s)
+                      - button "Help for Duración de calibración (s)" [ref=f4e414] [cursor=pointer]
+                    - generic [ref=f4e419]:
+                      - spinbutton "Duración de calibración (s)" [ref=f4e420]: "10"
+                      - generic [ref=f4e421]:
+                        - button "Decrement" [ref=f4e422] [cursor=pointer]
+                        - button "Increment" [ref=f4e425] [cursor=pointer]
+                  - group [ref=f4e430]:
+                    - generic [ref=f4e432] [cursor=pointer]:
+                      - generic [aria-hidden] [ref=f4e434]: keyboard_arrow_right
+                      - paragraph [ref=f4e437]: Ajustes de respaldo y alerta
+                  - button [ref=f4e440] [cursor=pointer]:
+                    - paragraph [ref=f4e445]: Aplicar a la detección
+                  - paragraph [ref=f4e450]: Estos ajustes se conservan durante la sesión de interfaz; no se guardan como perfil permanente del conductor.
+                - generic [ref=f4e454]:
+                  - heading "02 / PRUEBA DE APERTURA" [level=5] [ref=f4e460]:
+                    - text: 02 / PRUEBA DE APERTURA
+                    - generic [ref=f4e461]:
+                      - link "Link to heading":
+                        - /url: "#02-prueba-de-apertura"
+                  - paragraph [ref=f4e466]: Desliza para abrir o cerrar el ojo de prueba. No modifica tu medición real.
+                  - generic [ref=f4e469]:
+                    - paragraph [ref=f4e473]: Apertura del ojo de prueba (EAR)
+                    - group "Apertura del ojo de prueba (EAR)" [ref=f4e474]:
+                      - generic [ref=f4e475]:
+                        - generic [ref=f4e476]:
+                          - slider "Apertura del ojo de prueba (EAR) Apertura del ojo de prueba (EAR)" [ref=f4e478]: "0.3"
+                          - generic:
+                            - generic:
+                              - paragraph: "0.300"
+                        - generic:
+                          - generic:
+                            - paragraph: "0.000"
+                          - generic:
+                            - paragraph: "0.450"
+                  - paragraph [ref=f4e483]:
+                    - img "Ojo · 6 puntos" [ref=f4e484]:
+                      - generic [ref=f4e487]: P1
+                      - generic [ref=f4e489]: P2
+                      - generic [ref=f4e491]: P3
+                      - generic [ref=f4e493]: P4
+                      - generic [ref=f4e495]: P5
+                      - generic [ref=f4e497]: P6
+                  - generic [ref=f4e499]:
+                    - paragraph [ref=f4e503]: EAR base de ejemplo
+                    - generic [ref=f4e505]:
+                      - spinbutton "EAR base de ejemplo" [ref=f4e506]: "0.300"
+                      - generic [ref=f4e507]:
+                        - button "Decrement" [ref=f4e508] [cursor=pointer]
+                        - button "Increment" [ref=f4e511] [cursor=pointer]
+                  - paragraph [ref=f4e518]: "Comparación ilustrativa: la cámara obtendrá tu EAR base real al calibrar."
+                  - generic [ref=f4e520]:
+                    - generic [ref=f4e525]:
+                      - paragraph [ref=f4e529]: EAR de prueba
+                      - paragraph [ref=f4e532]: "0.300"
+                    - generic [ref=f4e537]:
+                      - paragraph [ref=f4e541]: Umbral de prueba
+                      - paragraph [ref=f4e544]: "0.225"
+                  - status [ref=f4e547]:
+                    - paragraph [ref=f4e551]: OJO ABIERTO · La apertura alcanza o supera el umbral.
+              - group [ref=f4e554]:
+                - generic [ref=f4e556] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f4e558]: keyboard_arrow_right
+                  - paragraph [ref=f4e561]: Editar las seis coordenadas P1–P6
+              - generic [ref=f4e563]:
+                - heading "03 / CALIBRACIÓN CON CÁMARA" [level=5] [ref=f4e569]:
+                  - text: 03 / CALIBRACIÓN CON CÁMARA
+                  - generic [ref=f4e570]:
+                    - link "Link to heading":
+                      - /url: "#03-calibracion-con-camara"
+                - generic [ref=f4e572]:
+                  - generic [ref=f4e578]:
+                    - paragraph [ref=f4e579]:
+                      - strong [ref=f4e580]: Selecciona tu conductor
+                    - paragraph [ref=f4e581]: Elige un perfil en la barra lateral para guardar la sesión.
+                  - generic [ref=f4e587]:
+                    - paragraph [ref=f4e588]:
+                      - strong [ref=f4e589]: Inicia la cámara
+                    - paragraph [ref=f4e590]: En Monitoreo en vivo pulsa START. Mira al frente con los ojos abiertos.
+                  - generic [ref=f4e596]:
+                    - paragraph [ref=f4e597]:
+                      - strong [ref=f4e598]: Comprueba los puntos
+                    - paragraph [ref=f4e599]: Revisa ambos ojos en el panel EAR. Recalibra si cambias de posición o iluminación.
+        - separator [ref=f4e312]
+        - alert [ref=f4e315]:
+          - generic [ref=f4e317]:
+            - generic [aria-hidden] [ref=f4e320]: ⚠️
+            - paragraph [ref=f4e322]:
+              - strong [ref=f4e323]: Prototipo académico.
+              - text: "No sustituye sistemas de seguridad vehicular certificados. No lo use mientras conduce en vía pública: las pruebas se hacen con el vehículo detenido o en simulación. Las expresiones faciales son apariencias, no emociones reales."

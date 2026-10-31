@@ -1,0 +1,721 @@
+% ======================================================================
+%  Guía de laboratorio — DriveGuard Lab
+%  Curso: Deep Learning y Agentes Inteligentes
+%  Docente: Ing. Julián René Muñoz Burbano
+%  Compilar con: pdflatex Guia_Laboratorio_DriveGuard.tex  (dos veces)
+%  También compila en Overleaf (pdfLaTeX).
+% ======================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage[margin=2.3cm,headheight=14pt]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,},group-minimum-digits=4}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,backgrounds}
+\usepackage[hidelinks]{hyperref}
+
+% ---------------------------------------------------------------- colores
+\definecolor{azul}{HTML}{1F4E79}
+\definecolor{azulclaro}{HTML}{E8F0F8}
+\definecolor{verde}{HTML}{2E9E4F}
+\definecolor{amarillo}{HTML}{E6B800}
+\definecolor{naranja}{HTML}{F07F13}
+\definecolor{rojo}{HTML}{D62F2F}
+\definecolor{gris}{HTML}{F4F5F7}
+\definecolor{grisborde}{HTML}{C9CED6}
+
+\hypersetup{colorlinks=true,linkcolor=azul,urlcolor=azul,citecolor=azul}
+
+% ---------------------------------------------------------------- encabezado
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{azul} DriveGuard Lab — Guía de laboratorio}
+\fancyhead[R]{\small\color{azul} Deep Learning y Agentes Inteligentes}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{3em}
+\setlist{itemsep=2pt,topsep=3pt}
+\renewcommand{\arraystretch}{1.25}
+
+% ---------------------------------------------------------------- código
+\lstdefinestyle{consola}{
+  basicstyle=\ttfamily\small, backgroundcolor=\color{gris}, frame=single,
+  rulecolor=\color{grisborde}, framesep=4pt, xleftmargin=6pt, xrightmargin=6pt,
+  breaklines=true, columns=fullflexible, keepspaces=true, showstringspaces=false,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {Ñ}{{\~N}}1 {°}{{$^\circ$}}1
+}
+\lstdefinestyle{python}{style=consola, language=Python,
+  keywordstyle=\color{azul}\bfseries, commentstyle=\color{gray}\itshape, stringstyle=\color{rojo!80!black}}
+\lstset{style=consola}
+
+% ---------------------------------------------------------------- cajas
+\newtcolorbox{objetivo}[1][]{colback=azulclaro,colframe=azul,fonttitle=\bfseries,title=#1,arc=2mm,boxrule=0.6pt}
+\newtcolorbox{aviso}[1][Atención]{colback=rojo!6,colframe=rojo,fonttitle=\bfseries,title=#1,arc=2mm,boxrule=0.6pt}
+\newtcolorbox{nota}[1][Nota]{colback=amarillo!10,colframe=amarillo!80!black,fonttitle=\bfseries,title=#1,arc=2mm,boxrule=0.6pt}
+\newtcolorbox{verificacion}[1][Punto de verificación]{colback=verde!7,colframe=verde,fonttitle=\bfseries,title=#1,arc=2mm,boxrule=0.6pt}
+
+\newcommand{\codigoguion}{\textunderscore\allowbreak}
+\newcommand{\codigo}[1]{{\small\ttfamily\let\_\codigoguion #1}}
+\newcommand{\nivel}[2]{\tikz[baseline=-0.6ex]\node[fill=#1,text=white,rounded corners=2pt,inner sep=2pt,font=\scriptsize\bfseries]{#2};}
+
+\begin{document}
+
+% ======================================================================
+%  PORTADA
+% ======================================================================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[azul] (current page.north west) rectangle ([yshift=-7.2cm]current page.north east);
+  \node[anchor=north west,text=white,font=\Large\bfseries] at ([xshift=2.2cm,yshift=-1.8cm]current page.north west)
+    {Deep Learning y Agentes Inteligentes};
+  \node[anchor=north west,text=white,font=\large] at ([xshift=2.2cm,yshift=-2.6cm]current page.north west)
+    {Guía de laboratorio};
+  \node[anchor=north west,text=white,font=\fontsize{34}{40}\selectfont\bfseries] at ([xshift=2.2cm,yshift=-3.8cm]current page.north west)
+    {DriveGuard Lab};
+  \node[anchor=north west,text=white!85!azul,font=\Large] at ([xshift=2.2cm,yshift=-5.3cm]current page.north west)
+    {Detección de somnolencia y riesgo del conductor};
+\end{tikzpicture}
+
+\vspace*{7.2cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  % semáforo de niveles
+  \foreach \x/\c/\t in {0/verde/NORMAL,3.2/amarillo/BAJO,6.4/naranja/MEDIO,9.6/rojo/ALTO}{
+    \fill[\c,rounded corners=4pt] (\x,0) rectangle +(2.8,1.1);
+    \node[text=white,font=\bfseries] at (\x+1.4,0.55) {\t};
+  }
+  \draw[-{Latex[length=3mm]},thick,azul] (0,-0.5) -- (12.4,-0.5) node[midway,below,font=\small] {nivel de riesgo};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.2cm}
+\begin{center}
+\begin{tabular}{>{\bfseries}r l}
+Curso: & Deep Learning y Agentes Inteligentes\\
+Docente: & Ing. Julián René Muñoz Burbano\\
+Proyecto: & DriveGuard Lab v1.0 (continuación de SentimentLab V3)\\
+Duración: & 4 sesiones de 2 horas\\
+Modalidad: & Individual o en parejas\\
+Entorno: & Anaconda · Jupyter · Streamlit · FastAPI · MongoDB\\
+\end{tabular}
+\end{center}
+
+\vfill
+\begin{aviso}[Aviso de seguridad]
+Este sistema es un \textbf{prototipo académico}. No sustituye sistemas de seguridad vehicular certificados.
+Todas las pruebas se realizan frente al computador, con el vehículo detenido o con videos grabados.
+\textbf{Nunca} lo pruebe mientras conduce en vía pública.
+\end{aviso}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ======================================================================
+\section{Introducción}
+% ======================================================================
+La somnolencia al volante es una de las causas de siniestros viales más difíciles de detectar: el conductor
+suele no darse cuenta de que está a punto de dormirse. Un \emph{microsueño} de dos segundos a
+\SI{80}{km/h} equivale a recorrer más de \SI{44}{m} sin control del vehículo.
+
+En este laboratorio se construye \textbf{DriveGuard Lab}, un sistema que observa al conductor con una
+cámara web y estima su nivel de riesgo a partir de señales visuales: cuánto tiempo mantiene los ojos
+cerrados, con qué frecuencia bosteza, si cabecea o gira la cabeza y qué expresión facial aparenta. Cuando
+detecta riesgo, hace sonar una alarma; si el conductor no responde, avisa automáticamente a sus contactos
+de emergencia por correo electrónico y Telegram.
+
+El proyecto continúa \emph{SentimentLab V3}: conserva su arquitectura (\codigo{core/}, API con FastAPI,
+interfaz con Streamlit, MongoDB, notebooks y pruebas) y reutiliza su modelo de expresiones faciales.
+
+% ======================================================================
+\section{Objetivos}
+% ======================================================================
+\begin{objetivo}[Objetivo general]
+Diseñar, implementar y evaluar un sistema de visión por computador que detecte señales de somnolencia y
+distracción en un conductor, genere alertas sonoras locales y ejecute un protocolo de emergencia,
+integrando modelos preentrenados, un motor de reglas, una API REST y una base de datos NoSQL.
+\end{objetivo}
+
+\textbf{Objetivos específicos.} Al finalizar el laboratorio, el estudiante será capaz de:
+\begin{enumerate}
+  \item Calcular e interpretar las métricas EAR, MAR y PERCLOS a partir de puntos faciales de MediaPipe.
+  \item Explicar por qué un detector de rostros (Haar Cascade) no basta para medir somnolencia.
+  \item Implementar un motor de riesgo con calibración por conductor, ventanas temporales e histéresis.
+  \item Justificar el uso de hilos separados para video, clasificación de expresiones y alarma.
+  \item Configurar y probar un protocolo de emergencia con notificaciones reales o simuladas.
+  \item Entrenar una CNN para clasificar ojos abiertos y cerrados, y compararla con la regla del EAR.
+  \item Evaluar el sistema con métricas (precisión, recall, F1, falsas alarmas, latencia) y analizar sus
+        limitaciones técnicas y éticas.
+\end{enumerate}
+
+% ======================================================================
+\section{Marco teórico}
+% ======================================================================
+\subsection{Puntos faciales con MediaPipe FaceLandmarker}
+\emph{FaceLandmarker} es un modelo preentrenado de Google que, a partir de una imagen RGB, estima
+\textbf{478 puntos tridimensionales} del rostro, 52 coeficientes de expresión (\emph{blendshapes}) y una
+matriz de transformación $4\times4$ que describe la orientación de la cabeza. Funciona en tiempo real en
+CPU (entre 10 y \SI{25}{ms} por fotograma en un portátil).
+
+\begin{nota}[¿Por qué no basta el Haar Cascade de SentimentLab V3?]
+El detector Haar Cascade devuelve solo el \emph{rectángulo} donde está la cara. Para saber si los ojos están
+cerrados o la boca abierta se necesita la \emph{forma} de los párpados y los labios, es decir, puntos
+faciales. Por eso DriveGuard Lab usa FaceLandmarker (API \emph{Tasks} de MediaPipe).
+\end{nota}
+
+\subsection{Eye Aspect Ratio (EAR)}
+Soukupová y Čech \cite{soukupova2016} proponen medir la apertura del ojo con seis puntos: dos comisuras
+($p_1$, $p_4$) y dos pares de puntos en los párpados superior ($p_2$, $p_3$) e inferior ($p_6$, $p_5$):
+\begin{equation}
+  \mathrm{EAR} = \frac{\lVert p_2 - p_6\rVert + \lVert p_3 - p_5\rVert}{2\,\lVert p_1 - p_4\rVert}
+  \label{eq:ear}
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9,
+  pt/.style={circle,fill=azul,inner sep=1.6pt},
+  lbl/.style={font=\small}]
+  % ojo abierto
+  \begin{scope}
+    \draw[thick,fill=azulclaro] (0,0) .. controls (1.2,1.1) and (2.8,1.1) .. (4,0) .. controls (2.8,-1.1) and (1.2,-1.1) .. (0,0);
+    \fill[azul!70] (2,0) circle (0.55);
+    \node[pt,label=left:{\small $p_1$}] (a) at (0,0) {};
+    \node[pt,label=above:{\small $p_2$}] (b) at (1.3,0.8) {};
+    \node[pt,label=above:{\small $p_3$}] (c) at (2.7,0.8) {};
+    \node[pt,label=right:{\small $p_4$}] (d) at (4,0) {};
+    \node[pt,label=below:{\small $p_5$}] (e) at (2.7,-0.8) {};
+    \node[pt,label=below:{\small $p_6$}] (f) at (1.3,-0.8) {};
+    \draw[rojo,thick,dashed] (b)--(f) (c)--(e);
+    \draw[verde,thick,dashed] (a)--(d);
+    \node[lbl] at (2,-1.9) {Ojo abierto: $\mathrm{EAR}\approx 0{,}30$};
+  \end{scope}
+  % ojo cerrado
+  \begin{scope}[xshift=6.5cm]
+    \draw[thick,fill=azulclaro] (0,0) .. controls (1.2,0.18) and (2.8,0.18) .. (4,0) .. controls (2.8,-0.18) and (1.2,-0.18) .. (0,0);
+    \node[pt] (a) at (0,0) {}; \node[pt] (d) at (4,0) {};
+    \node[pt] (b) at (1.3,0.13) {}; \node[pt] (c) at (2.7,0.13) {};
+    \node[pt] (e) at (2.7,-0.13) {}; \node[pt] (f) at (1.3,-0.13) {};
+    \draw[verde,thick,dashed] (a)--(d);
+    \node[lbl] at (2,-1.9) {Ojo cerrado: $\mathrm{EAR}\approx 0{,}05$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Puntos del EAR. Las distancias verticales (rojo) se dividen por la horizontal (verde).}
+\label{fig:ear}
+\end{figure}
+
+El EAR es \textbf{invariante a la escala}: no cambia si el conductor se acerca o se aleja de la cámara.
+Un ojo abierto da valores entre 0,25 y 0,35; uno cerrado, menos de 0,15. En la malla de MediaPipe los
+índices son \codigo{[33, 160, 158, 133, 153, 144]} (ojo derecho) y \codigo{[362, 385, 387, 263, 373, 380]}
+(ojo izquierdo).
+
+\subsection{Mouth Aspect Ratio (MAR) y bostezos}
+De forma análoga, la apertura de la boca se mide con las comisuras internas ($c_1=78$, $c_2=308$) y tres
+pares verticales $(81,178)$, $(13,14)$ y $(311,402)$:
+\begin{equation}
+  \mathrm{MAR} = \frac{\tfrac{1}{3}\sum_{k=1}^{3}\lVert v_k^{\text{sup}} - v_k^{\text{inf}}\rVert}{\lVert c_1 - c_2\rVert}
+\end{equation}
+Con la boca cerrada $\mathrm{MAR}\approx 0$–$0{,}1$; al hablar, $0{,}2$–$0{,}4$. Se cuenta un
+\textbf{bostezo} cuando $\mathrm{MAR}>0{,}6$ durante al menos \SI{2}{s}.
+
+\subsection{PERCLOS}
+PERCLOS (\emph{PERcentage of eyelid CLOSure}) es la proporción de tiempo que los ojos permanecen cerrados en
+una ventana deslizante \cite{wierwille1994}. Es uno de los indicadores de somnolencia más usados:
+\begin{equation}
+  \mathrm{PERCLOS} = \frac{\text{fotogramas con ojos cerrados en los últimos } 60\ \mathrm{s}}{\text{fotogramas con rostro en los últimos } 60\ \mathrm{s}}
+\end{equation}
+Una persona alerta parpadea unas 15–20 veces por minuto (PERCLOS $<10$\,\%). Valores superiores al 30\,\%
+indican cansancio importante.
+
+\subsection{Orientación de la cabeza}
+De la matriz de transformación $R$ se obtienen tres ángulos: \emph{pitch} (inclinación arriba–abajo),
+\emph{yaw} (giro izquierda–derecha) y \emph{roll}. Durante la calibración se toma la postura natural del
+conductor como referencia; un \textbf{cabeceo} es una inclinación de más de $15^\circ$ respecto a esa
+referencia y una \textbf{distracción}, un giro de más de $30^\circ$.
+
+\subsection{Motor de riesgo}
+El motor combina los indicadores en cuatro niveles (tabla~\ref{tab:niveles}).
+
+\begin{table}[H]
+\centering
+\caption{Reglas por defecto del motor de riesgo (configurables en la aplicación).}
+\label{tab:niveles}
+\begin{tabularx}{\textwidth}{l X l}
+\toprule
+\textbf{Indicador} & \textbf{Regla} & \textbf{Nivel}\\
+\midrule
+Microsueño & ojos cerrados de forma continua $\geq$ \SI{1,5}{s} & \nivel{rojo}{ALTO}\\
+Cabeza caída & inclinación $>15^\circ$ durante $\geq$ \SI{3}{s} & \nivel{rojo}{ALTO}\\
+Cansancio (PERCLOS) & $>30$\,\% del último minuto con ojos cerrados & \nivel{naranja}{MEDIO}\\
+Bostezos & $\geq 3$ bostezos en 5 minutos & \nivel{naranja}{MEDIO}\\
+Cabeceos & $\geq 3$ cabeceos en 60 s & \nivel{naranja}{MEDIO}\\
+Distracción & cabeza girada $>30^\circ$ o rostro ausente durante $>$ \SI{3}{s} & \nivel{naranja}{MEDIO}\\
+Expresión negativa & $>70$\,\% de clasificaciones negativas en 30 s & \nivel{amarillo}{BAJO}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Tres mecanismos hacen que el motor sea robusto:
+\begin{itemize}
+  \item \textbf{Calibración por conductor.} Durante los primeros \SI{10}{s} se mide la mediana del EAR del
+        conductor con los ojos abiertos (EAR base). El umbral de ojo cerrado es el 75\,\% de ese valor. Así
+        se adapta a personas con ojos más grandes o más pequeños.
+  \item \textbf{Suavizado.} El EAR se promedia en los últimos 3 fotogramas para reducir el ruido.
+  \item \textbf{Histéresis.} El nivel sube de inmediato, pero solo baja tras \SI{2}{s} sin la condición. Esto
+        evita que la alarma se encienda y apague con cada fotograma.
+\end{itemize}
+
+\subsection{Expresiones faciales: ViT y CNN}
+Se reutiliza el clasificador \codigo{trpakov/vit-face-expression} de SentimentLab V3, un \emph{Vision
+Transformer} (ViT) \cite{dosovitskiy2021} que divide la imagen en parches y los procesa con mecanismos de
+atención. Una \textbf{CNN}, en cambio, aplica filtros convolucionales que extraen patrones locales. En el
+laboratorio 04 se entrena una CNN pequeña para clasificar recortes de ojos.
+
+\begin{nota}[Expresiones no son emociones]
+Las etiquetas del ViT (enojo, tristeza, miedo\dots) describen \emph{apariencias} faciales, no emociones
+internas. El modelo tiene sesgos de su conjunto de entrenamiento. Por eso, en DriveGuard Lab, la expresión
+negativa solo genera un riesgo \emph{bajo}.
+\end{nota}
+
+\subsection{Arquitectura multihilo y alarma local}
+\codigo{streamlit-webrtc} procesa cada fotograma en un \textbf{hilo de video} independiente del hilo de
+Streamlit. Desde ese hilo \textbf{no se puede} usar \codigo{st.audio} ni modificar la página. Como la
+aplicación se ejecuta en el mismo portátil que tiene la cámara, la alarma suena localmente con
+\codigo{pygame} (o \codigo{winsound} en Windows) desde un hilo propio. El ViT, que tarda entre 150 y
+\SI{600}{ms} en CPU, también corre en un hilo aparte y solo cada \codigo{EXPRESION\_INTERVALO\_S} segundos,
+para no frenar la detección de somnolencia.
+
+\subsection{Protocolo de emergencia}
+Una cámara que mira al conductor \textbf{no puede detectar un choque}. En un vehículo real eso lo hace un
+acelerómetro (sistemas como eCall). DriveGuard Lab define tres disparadores (figura~\ref{fig:estados}):
+\begin{enumerate}
+  \item \textbf{Conductor que no responde:} nivel ALTO y \SI{10}{s} más con ojos cerrados, cabeza caída o
+        sin rostro visible.
+  \item \textbf{Botón SOS:} envío inmediato.
+  \item \textbf{Choque simulado:} botón o archivo CSV de acelerómetro con un pico mayor que \SI{4}{g}.
+\end{enumerate}
+En los casos 1 y 3 se muestra una cuenta regresiva de \SI{15}{s} con el botón \emph{Estoy bien} para
+cancelar falsas alarmas.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.3cm and 2.2cm,
+  est/.style={rectangle,rounded corners=3pt,draw=azul,fill=azulclaro,thick,minimum width=2.6cm,minimum height=0.9cm,align=center,font=\small},
+  fin/.style={est,draw=rojo,fill=rojo!8},
+  flecha/.style={-{Latex[length=2.5mm]},thick},
+  lab/.style={font=\scriptsize,align=center,fill=white,inner sep=1pt}]
+  \node[est] (mon) {Monitoreo};
+  \node[est,right=3cm of mon] (alto) {Riesgo\\ALTO};
+  \node[est,below=1.6cm of alto] (cuenta) {Cuenta regresiva\\15 s};
+  \node[fin,right=2.6cm of cuenta] (envio) {Envío de alertas\\correo, Telegram};
+  \draw[flecha] (mon) to[bend left=15] node[lab,above]{ojos cerrados $\geq$ 1,5 s} (alto);
+  \draw[flecha] (alto) to[bend left=15] node[lab,below]{abre los ojos} (mon);
+  \draw[flecha] (alto) -- node[lab,right]{10 s sin\\respuesta} (cuenta);
+  \draw[flecha] (mon) |- node[lab,pos=0.25,right]{choque\\simulado} (cuenta);
+  \draw[flecha] (cuenta) -- node[lab,above]{15 s} (envio);
+  \draw[flecha] (cuenta.south) -- ++(0,-0.6) -| node[lab,pos=0.25,below]{``Estoy bien''} ([xshift=-1.2cm]mon.west) -- (mon.west);
+  \draw[flecha] (mon.north) -- ++(0,0.9) -| node[lab,pos=0.25,above]{botón SOS (inmediato)} (envio.north);
+\end{tikzpicture}
+\caption{Estados del protocolo de emergencia.}
+\label{fig:estados}
+\end{figure}
+
+% ======================================================================
+\section{Arquitectura del sistema}
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.94,transform shape,
+  caja/.style={rectangle,rounded corners=3pt,draw=azul,fill=white,thick,minimum height=0.85cm,align=center,font=\small,text width=3.1cm},
+  flecha/.style={-{Latex[length=2.3mm]},thick,azul},
+  grupo/.style={rectangle,rounded corners=5pt,draw=grisborde,fill=gris,inner sep=7pt}]
+  \node[caja,fill=azulclaro] (cam) {Cámara web};
+  \node[caja,right=0.9cm of cam] (mp) {MediaPipe\\EAR, MAR, pose};
+  \node[caja,right=0.9cm of mp] (motor) {Motor de riesgo};
+  \node[caja,below=0.7cm of mp] (vit) {ViT expresiones\\(hilo aparte)};
+  \node[caja,below=0.7cm of motor] (alarma) {Alarma local\\pygame / winsound};
+  \node[caja,above=0.8cm of motor] (panel) {Panel Streamlit\\semáforo, SOS};
+  \node[caja,right=1.3cm of panel] (api) {API FastAPI};
+  \node[caja,below=0.8cm of api,fill=verde!10] (db) {MongoDB};
+  \node[caja,below=0.7cm of db,fill=rojo!8] (notif) {Correo, Telegram\\SMS (opcional)};
+  \draw[flecha] (cam) -- (mp);
+  \draw[flecha] (mp) -- (motor);
+  \draw[flecha,dashed] (mp) -- (vit);
+  \draw[flecha,dashed] (vit) -- (motor);
+  \draw[flecha] (motor) -- (alarma);
+  \draw[flecha] (motor) -- (panel);
+  \draw[flecha] (panel) -- node[above,font=\scriptsize]{eventos} (api);
+  \draw[flecha] (api) -- (db);
+  \draw[flecha] (api.east) -- ++(0.4,0) |- (notif.east);
+  \begin{scope}[on background layer]
+    \node[grupo,fit=(mp)(motor)(vit)(alarma),label={[font=\scriptsize\bfseries,text=azul]below:core/ (hilo de video)}] {};
+  \end{scope}
+\end{tikzpicture}
+\caption{Componentes principales de DriveGuard Lab.}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Cambios respecto a SentimentLab V3 y su justificación.}
+\begin{tabularx}{\textwidth}{>{\raggedright}p{3.6cm} X}
+\toprule
+\textbf{Cambio} & \textbf{Justificación}\\
+\midrule
+MediaPipe FaceLandmarker & El Haar Cascade solo encuentra la cara; para ojos y boca se necesitan puntos faciales.\\
+Alarma local con pygame/winsound & El hilo de video de streamlit-webrtc no puede reproducir sonido en la página.\\
+Protocolo de emergencia & Una cámara no detecta choques: se usan conductor que no responde, SOS y choque simulado.\\
+Creación automática de \codigo{data/} & En el laboratorio 02 la carpeta no venía en el zip y la celda de cámara fallaba.\\
+ViT en hilo aparte cada $N$ s & El ViT es lento en CPU; así no afecta la detección de somnolencia.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ======================================================================
+\section{Materiales y entorno}
+% ======================================================================
+\begin{itemize}
+  \item Portátil con Windows 10/11 (o macOS/Linux), 8 GB de RAM como mínimo y cámara web.
+  \item Anaconda o Miniconda con Python 3.11.
+  \item MongoDB Community Server (servicio local) y, opcionalmente, MongoDB Compass.
+  \item Navegador Chrome o Edge actualizado.
+  \item Una cuenta de Gmail con verificación en dos pasos (para el correo) y Telegram (para los mensajes).
+  \item Proyecto \codigo{DriveGuardLab.zip} entregado por el docente.
+\end{itemize}
+
+% ======================================================================
+\section{Instalación}
+% ======================================================================
+Abra \textbf{Anaconda Prompt}, descomprima el proyecto y ubíquese en su carpeta.
+
+\begin{lstlisting}
+conda create -n DriveGuardLab python=3.11 -y
+conda activate DriveGuardLab
+python -m pip install -r requirements.txt
+python -m ipykernel install --user --name DriveGuardLab --display-name "Python (DriveGuard Lab)"
+copy .env.example .env
+python scripts/descargar_modelos.py
+python scripts/generar_recursos.py
+python -m pytest
+\end{lstlisting}
+
+\begin{verificacion}
+\codigo{pytest} debe terminar con \textbf{43 passed}. Si falla alguna importación, revise que el entorno
+\codigo{DriveGuardLab} esté activado.
+\end{verificacion}
+
+Para ejecutar la aplicación se necesitan \textbf{dos consolas} con el entorno activado:
+\begin{lstlisting}
+:: Consola 1 - API
+python -m uvicorn backend.main:app --reload --port 8000
+
+:: Consola 2 - Interfaz
+python -m streamlit run frontend/app.py
+\end{lstlisting}
+
+% ======================================================================
+\section{Procedimiento}
+% ======================================================================
+
+% ----------------------------------------------------------------------
+\subsection{Práctica 1 — Verificación del entorno (sesión 1, 40 min)}
+\begin{enumerate}
+  \item Abra \codigo{jupyter lab} desde la raíz del proyecto y ejecute
+        \codigo{notebooks/00\_Verificacion\_Entorno.ipynb} con el kernel \emph{Python (DriveGuard Lab)}.
+  \item Compruebe que todas las librerías aparecen con \codigo{[OK]} y que el modelo
+        \codigo{face\_landmarker.task} se descargó.
+  \item Cambie \codigo{SONAR = True} y escuche los dos sonidos de alarma.
+  \item Cambie \codigo{USE\_CAMERA = True} y tome una captura. Observe que se guarda en
+        \codigo{data/capturas/} sin errores: la carpeta se crea automáticamente.
+  \item Verifique que MongoDB responde. Si no, inicie el servicio en \codigo{services.msc}.
+\end{enumerate}
+
+\begin{verificacion}
+Captura guardada, sonidos audibles y mensaje \codigo{[OK] MongoDB responde}.
+\end{verificacion}
+
+% ----------------------------------------------------------------------
+\subsection{Práctica 2 — EAR, MAR, PERCLOS y motor de riesgo (sesiones 1 y 2)}
+Trabaje en \codigo{notebooks/03\_Somnolencia\_EAR\_MAR.ipynb}.
+\begin{enumerate}
+  \item \textbf{Secciones 2–4.} Ejecute las celdas de EAR y MAR. Verifique a mano, con la
+        ecuación~\eqref{eq:ear}, el EAR del ojo abierto de la figura del notebook.
+  \item \textbf{Sección 5.} Ejecute el motor con los siete escenarios sintéticos. Registre en la
+        tabla~\ref{tab:escenarios} el nivel máximo y el instante en que se activa cada alerta.
+  \item \textbf{Sección 6.} Ejecute el experimento de umbrales y complete la tabla~\ref{tab:umbrales}.
+        Elija la configuración que considere más adecuada y justifíquela.
+  \item \textbf{Sección 7.} Tome una foto suya y visualice los 478 puntos. Anote su EAR con los ojos
+        abiertos, entrecerrados y cerrados.
+  \item \textbf{Sección 8.} Grabe un video de 60–90 s con este guion:
+        \begin{enumerate}[label=\alph*)]
+          \item 0–10 s: mirar al frente (calibración).
+          \item 10–25 s: parpadeo normal.
+          \item 25–30 s: ojos cerrados \SI{3}{s}.
+          \item 35–45 s: un bostezo largo.
+          \item 50–60 s: tres cabeceos.
+          \item 65–75 s: girar la cabeza a un lado \SI{5}{s}.
+        \end{enumerate}
+        Analícelo y compare las alertas detectadas con lo que realmente hizo.
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\caption{Registro de escenarios sintéticos (complete).}
+\label{tab:escenarios}
+\begin{tabularx}{\textwidth}{l X X X X}
+\toprule
+\textbf{Escenario} & \textbf{Nivel máximo} & \textbf{Instante (s)} & \textbf{Motivo} & \textbf{¿Emergencia?}\\
+\midrule
+normal & & & & \\
+cansancio & & & & \\
+microsueño & & & & \\
+sin\_respuesta & & & & \\
+distracción & & & & \\
+cabeceos & & & & \\
+rostro\_ausente & & & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Experimento de umbrales: detección / falsas alarmas (\%).}
+\label{tab:umbrales}
+\begin{tabularx}{\textwidth}{c *{3}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{microsueno\_s} & \textbf{factor 0,65} & \textbf{factor 0,75} & \textbf{factor 0,85}\\
+\midrule
+0,5 s & \hspace{1.5cm}/ & \hspace{1.5cm}/ & \hspace{1.5cm}/ \\
+1,0 s & \hspace{1.5cm}/ & \hspace{1.5cm}/ & \hspace{1.5cm}/ \\
+1,5 s & \hspace{1.5cm}/ & \hspace{1.5cm}/ & \hspace{1.5cm}/ \\
+2,0 s & \hspace{1.5cm}/ & \hspace{1.5cm}/ & \hspace{1.5cm}/ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ----------------------------------------------------------------------
+\subsection{Práctica 3 — Aplicación en vivo y protocolo de emergencia (sesión 3)}
+\begin{enumerate}
+  \item Inicie la API y la interfaz. En la barra lateral deben aparecer \emph{API conectada} y
+        \emph{MongoDB conectado}.
+  \item \textbf{Conductor.} Registre su nombre y al menos un contacto de emergencia (un compañero) con
+        correo y \codigo{chat\_id} de Telegram.
+  \item \textbf{Notificaciones.} Configure Gmail y Telegram en \codigo{.env} (ver README, sección 7).
+        Reinicie la API y use \emph{Configuración $\rightarrow$ Enviar mensaje de prueba}. Si no tiene
+        credenciales, active \codigo{NOTIFICACIONES\_SIMULADAS=true}.
+  \item \textbf{Monitoreo en vivo.} Pulse \emph{START}, mire al frente durante la calibración y observe el
+        semáforo. Pruebe, en este orden:
+        \begin{enumerate}[label=\alph*)]
+          \item parpadeos normales (debe permanecer en NORMAL);
+          \item ojos cerrados \SI{2}{s} (ALTO y sirena);
+          \item \emph{Estoy bien} (se silencia la alarma);
+          \item tres bostezos largos (MEDIO);
+          \item girar la cabeza \SI{4}{s} (distracción);
+          \item ojos cerrados más de \SI{12}{s} (conductor que no responde y cuenta regresiva). Deje que
+                termine la cuenta regresiva y confirme que el compañero recibe el mensaje.
+        \end{enumerate}
+  \item \textbf{SOS y choque.} Pulse \emph{SOS}. Luego abra \emph{Simulación de impacto}, cargue el archivo
+        \codigo{acelerometro\_choque.csv} de la carpeta \codigo{data/ejemplos} y cancele la cuenta regresiva con
+        \emph{Estoy bien}. Repita con \codigo{acelerometro\_sin\_choque.csv}.
+  \item \textbf{Historial.} Revise la sesión: eventos por tipo, gráficas de EAR y PERCLOS y alertas enviadas.
+        Exporte los eventos a CSV.
+  \item \textbf{Rendimiento.} Anote los FPS con las expresiones activadas y desactivadas, y con
+        \codigo{EXPRESION\_INTERVALO\_S} = 1, 2 y 5 s.
+\end{enumerate}
+
+\begin{verificacion}
+El contacto recibe el mensaje con nombre, hora, motivo, nivel y ubicación. El historial muestra la sesión
+con sus eventos y las alertas enviadas. Una segunda alerta en menos de 2 minutos aparece como
+\emph{omitida\_cooldown}.
+\end{verificacion}
+
+\begin{table}[H]
+\centering
+\caption{Registro de pruebas en vivo (complete).}
+\begin{tabularx}{\textwidth}{X c c c X}
+\toprule
+\textbf{Prueba} & \textbf{¿Detectó?} & \textbf{Nivel} & \textbf{Latencia (s)} & \textbf{Observaciones}\\
+\midrule
+Parpadeo normal & & & & \\
+Ojos cerrados 2 s & & & & \\
+Bostezos & & & & \\
+Giro de cabeza & & & & \\
+Sin respuesta 12 s & & & & \\
+SOS & & & & \\
+Choque simulado & & & & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ----------------------------------------------------------------------
+\subsection{Práctica 4 — CNN de ojos abiertos y cerrados (sesión 4)}
+Trabaje en \codigo{notebooks/04\_CNN\_Ojos\_Abiertos\_Cerrados.ipynb}.
+\begin{enumerate}
+  \item Descargue el MRL Eye Dataset \cite{fusek2018} y descomprímalo en \codigo{data/ojos/mrl/}, o capture
+        sus propios ojos con la sección 2 del notebook (\codigo{USE\_CAMERA = True}).
+  \item Entrene la CNN (sección 5) y registre la curva de pérdida y la exactitud de validación.
+  \item Evalúe en el conjunto de prueba: exactitud, F1 por clase y matriz de confusión.
+  \item Mida el tiempo de inferencia por fotograma.
+  \item Grabe un video con intervalos conocidos de ojos cerrados y compare EAR vs.\ CNN (sección 8).
+  \item Active la CNN en la aplicación con \codigo{OJOS\_METODO=cnn} y repita la prueba de microsueño.
+\end{enumerate}
+
+\begin{aviso}[Modo demostración]
+Si no hay datos, el notebook genera ojos sintéticos solo para comprobar que el código funciona. Esas
+métricas no son válidas para el informe ni para usar la CNN en la aplicación.
+\end{aviso}
+
+% ======================================================================
+\section{Preguntas de análisis}
+% ======================================================================
+\begin{enumerate}
+  \item ¿Por qué el EAR es invariante a la distancia entre el conductor y la cámara? Demuéstrelo a partir de
+        la ecuación~\eqref{eq:ear}.
+  \item ¿Qué ocurre con el EAR de una persona con gafas oscuras? ¿Y de noche sin iluminación infrarroja?
+  \item Explique el compromiso entre detección y falsas alarmas que observó en el experimento de umbrales.
+        ¿Qué error es más grave en este contexto y por qué?
+  \item ¿Por qué la histéresis evita que la alarma ``parpadee''? Dé un ejemplo numérico.
+  \item ¿Por qué no se puede reproducir el sonido de la alarma con \codigo{st.audio} desde el procesador de
+        video? ¿Qué cambiaría si la cámara estuviera en otro equipo?
+  \item ¿Qué ventajas y desventajas tiene calibrar el umbral por conductor frente a un umbral fijo?
+  \item ¿Qué riesgos tiene enviar alertas automáticas? Proponga dos medidas para reducir las falsas alertas.
+  \item Compare EAR y CNN en exactitud, velocidad, necesidad de datos y explicabilidad.
+  \item ¿Por qué una expresión facial ``negativa'' no indica necesariamente que el conductor esté en riesgo?
+  \item ¿Qué sensores adicionales usaría en un vehículo real para detectar un siniestro?
+\end{enumerate}
+
+% ======================================================================
+\section{Entregables y evaluación}
+% ======================================================================
+\textbf{Entregables:}
+\begin{enumerate}
+  \item Notebooks 03 y 04 ejecutados, con las tablas de esta guía completas.
+  \item Capturas de pantalla de la aplicación: semáforo en cada nivel, cuenta regresiva, historial y mensaje
+        recibido por el contacto.
+  \item Archivo CSV de eventos de una sesión en vivo.
+  \item Informe (máximo 6 páginas) con resultados, respuestas a las preguntas de análisis y conclusiones.
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\caption{Rúbrica de evaluación.}
+\begin{tabularx}{\textwidth}{>{\raggedright}p{3.4cm} X c}
+\toprule
+\textbf{Criterio} & \textbf{Descripción} & \textbf{Peso}\\
+\midrule
+Funcionamiento & Entorno instalado, aplicación en vivo, notificaciones y CNN funcionando. & 30\,\%\\
+Evaluación con métricas & Tablas completas: detección, falsas alarmas, latencia, FPS, F1 y matriz de confusión. & 30\,\%\\
+Análisis crítico & Explicación de errores, compromiso de umbrales, limitaciones y respuestas a las preguntas. & 25\,\%\\
+Documentación & Informe claro, capturas, código comentado y referencias. & 15\,\%\\
+\midrule
+\multicolumn{2}{r}{\textbf{Total}} & \textbf{100\,\%}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ======================================================================
+\section{Consideraciones éticas y de seguridad}
+% ======================================================================
+\begin{itemize}
+  \item \textbf{Consentimiento:} toda persona que aparezca en la cámara debe autorizarlo.
+  \item \textbf{Privacidad:} el sistema no guarda imágenes, solo métricas. Proteja el acceso a MongoDB, que
+        contiene datos de contacto.
+  \item \textbf{Alertas:} use contactos de prueba que sepan que recibirán mensajes. Nunca envíe alertas a
+        servicios de emergencia reales.
+  \item \textbf{Expresiones:} no use las etiquetas de expresión para evaluar, calificar ni tomar decisiones
+        sobre personas.
+  \item \textbf{Seguridad vial:} no pruebe el sistema mientras conduce. Un prototipo puede fallar.
+\end{itemize}
+
+% ======================================================================
+\section{Solución de problemas}
+% ======================================================================
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{>{\raggedright}p{4.6cm} X}
+\toprule
+\textbf{Síntoma} & \textbf{Solución}\\
+\midrule
+API no disponible & Inicie uvicorn desde la raíz del proyecto (consola 1).\\
+MongoDB no disponible & Inicie el servicio \emph{MongoDB Server} o revise \codigo{MONGO\_URI}.\\
+No se pudo iniciar el detector & Ejecute \codigo{python scripts/descargar\_modelos.py}.\\
+La cámara no inicia & Permita la cámara en el navegador y cierre Teams, Zoom u otras apps.\\
+No suena la alarma & Pruebe \codigo{ALARMA\_BACKEND=winsound} y revise el volumen.\\
+Muchas falsas alarmas & Recalibre con buena luz frontal; ajuste \codigo{factor\_ear} o \codigo{microsueno\_s}.\\
+Error de autenticación en Gmail & Use una contraseña de aplicación, no la contraseña normal.\\
+Telegram: \emph{chat not found} & El contacto debe escribir primero al bot.\\
+Video lento & Suba \codigo{EXPRESION\_INTERVALO\_S} o desactive las expresiones.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ======================================================================
+\begin{thebibliography}{9}
+\bibitem{soukupova2016} T.~Soukupová y J.~Čech, ``Real-Time Eye Blink Detection using Facial Landmarks,''
+  en \emph{21st Computer Vision Winter Workshop}, 2016.
+\bibitem{wierwille1994} W.~W.~Wierwille y L.~A.~Ellsworth, ``Evaluation of driver drowsiness by trained
+  raters,'' \emph{Accident Analysis \& Prevention}, vol.~26, no.~5, pp.~571--581, 1994.
+\bibitem{fusek2018} R.~Fusek, ``Pupil localization using geodesic distance,'' en \emph{Advances in Visual
+  Computing (ISVC 2018)}, Springer, 2018. (MRL Eye Dataset.)
+\bibitem{dosovitskiy2021} A.~Dosovitskiy \emph{et al.}, ``An Image is Worth 16x16 Words: Transformers for
+  Image Recognition at Scale,'' en \emph{ICLR}, 2021.
+\bibitem{mediapipe} Google, ``MediaPipe Face Landmarker,''
+  \url{https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker}.
+\end{thebibliography}
+
+% ======================================================================
+\appendix
+\section{Estructura del proyecto}
+\begin{lstlisting}
+DriveGuardLab/
+|-- core/        config, landmarks, riesgo, pipeline, alarma, faces,
+|                ojos_cnn, notificaciones, impacto, simulacion, storage
+|-- backend/     main, conductores_api, sesiones_api, alertas_api, schemas
+|-- frontend/    app, monitoreo_ui, conductor_ui, video_ui, historial_ui, config_ui
+|-- notebooks/   00_Verificacion_Entorno, 03_Somnolencia_EAR_MAR,
+|                04_CNN_Ojos_Abiertos_Cerrados
+|-- scripts/     descargar_modelos, generar_recursos, datos_demo
+|-- tests/       43 pruebas (pytest)
+|-- docs/        esta guía
+|-- assets/  data/  models/
+\end{lstlisting}
+
+\section{Endpoints de la API}
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Método} & \textbf{Ruta} & \textbf{Descripción}\\
+\midrule
+GET & \codigo{/health} & Estado de la API, MongoDB y canales\\
+POST/GET & \codigo{/conductores} & Crear y listar conductores\\
+GET/PUT/DELETE & \codigo{/conductores/\{id\}} & Consultar, actualizar o eliminar\\
+POST/GET & \codigo{/sesiones} & Crear y listar sesiones\\
+PUT & \codigo{/sesiones/\{id\}/cerrar} & Cerrar sesión y calcular resumen\\
+POST & \codigo{/eventos/lote} & Guardar eventos en lote\\
+GET & \codigo{/estadisticas/\{sesion\_id\}} & Resumen de una sesión\\
+POST & \codigo{/alertas/emergencia} & Protocolo de emergencia\\
+POST & \codigo{/alertas/prueba} & Mensaje de prueba\\
+GET & \codigo{/alertas/telegram/chats} & Obtener chat\_id de Telegram\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

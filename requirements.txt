@@ -1,0 +1,42 @@
+# DriveGuard Lab - dependencias (Python 3.11, probado en Windows + Anaconda)
+# Visión por computador
+mediapipe>=0.10.14
+opencv-contrib-python
+numpy
+pillow
+
+# Modelo de expresiones (ViT) y CNN opcional
+torch
+torchvision
+transformers>=4.40,<5
+accelerate
+
+# Backend
+fastapi
+uvicorn
+python-multipart
+pydantic>=2
+pymongo
+python-dotenv
+requests
+
+# Frontend
+streamlit>=1.50
+streamlit-webrtc
+av
+plotly
+pandas
+matplotlib
+
+# Alarma local
+pygame
+
+# Notebooks y evaluación
+jupyterlab
+ipykernel
+scikit-learn
+
+# Pruebas
+pytest
+httpx
+mongomock

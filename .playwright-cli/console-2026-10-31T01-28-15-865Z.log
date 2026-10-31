@@ -1,0 +1,47 @@
+[    6654ms] [ERROR] Failed to fetch metrics config: TimeoutError: signal timed out @ http://localhost:8501/static/js/index.Dlja0TUX.js:32
+[    6656ms] [ERROR] Undefined metrics config - deactivating metrics tracking. @ http://localhost:8501/static/js/index.Dlja0TUX.js:32
+[   27522ms] [WARNING] Unrecognized feature: 'ambient-light-sensor'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'battery'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'document-domain'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'layout-animations'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'legacy-image-formats'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'oversized-images'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'vr'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   27522ms] [WARNING] Unrecognized feature: 'wake-lock'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   32809ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://localhost:8501/component/streamlit_webrtc.component.webrtc_streamer/index.html?streamlitUrl=http%3A%2F%2Flocalhost%3A8501%2F:0
+[   56185ms] [WARNING] Unrecognized feature: 'ambient-light-sensor'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'battery'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'document-domain'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'layout-animations'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'legacy-image-formats'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'oversized-images'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'vr'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   56185ms] [WARNING] Unrecognized feature: 'wake-lock'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[   59222ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://localhost:8501/component/streamlit_webrtc.component.webrtc_streamer/index.html?streamlitUrl=http%3A%2F%2Flocalhost%3A8501%2F:0
+[  493703ms] [WARNING] Unrecognized feature: 'ambient-light-sensor'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'battery'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'document-domain'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'layout-animations'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'legacy-image-formats'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'oversized-images'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'vr'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  493703ms] [WARNING] Unrecognized feature: 'wake-lock'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  494789ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://localhost:8501/component/streamlit_webrtc.component.webrtc_streamer/index.html?streamlitUrl=http%3A%2F%2Flocalhost%3A8501%2F:0
+[  564846ms] [WARNING] Unrecognized feature: 'ambient-light-sensor'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564846ms] [WARNING] Unrecognized feature: 'battery'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564846ms] [WARNING] Unrecognized feature: 'document-domain'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564846ms] [WARNING] Unrecognized feature: 'layout-animations'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564847ms] [WARNING] Unrecognized feature: 'legacy-image-formats'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564847ms] [WARNING] Unrecognized feature: 'oversized-images'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564847ms] [WARNING] Unrecognized feature: 'vr'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  564847ms] [WARNING] Unrecognized feature: 'wake-lock'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  566401ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://localhost:8501/component/streamlit_webrtc.component.webrtc_streamer/index.html?streamlitUrl=http%3A%2F%2Flocalhost%3A8501%2F:0
+[  716160ms] [WARNING] Unrecognized feature: 'ambient-light-sensor'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716160ms] [WARNING] Unrecognized feature: 'battery'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716160ms] [WARNING] Unrecognized feature: 'document-domain'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716160ms] [WARNING] Unrecognized feature: 'layout-animations'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716160ms] [WARNING] Unrecognized feature: 'legacy-image-formats'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716161ms] [WARNING] Unrecognized feature: 'oversized-images'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716161ms] [WARNING] Unrecognized feature: 'vr'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  716161ms] [WARNING] Unrecognized feature: 'wake-lock'. @ http://localhost:8501/static/js/react-dom.CbzydqoA.js:0
+[  718907ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://localhost:8501/component/streamlit_webrtc.component.webrtc_streamer/index.html?streamlitUrl=http%3A%2F%2Flocalhost%3A8501%2F:0

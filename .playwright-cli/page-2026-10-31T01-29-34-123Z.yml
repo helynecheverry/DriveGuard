@@ -1,0 +1,247 @@
+- generic [ref=f2e2]:
+  - link "Skip to main content" [ref=f2e3] [cursor=pointer]:
+    - /url: "#stMain"
+  - region "Sidebar" [ref=f2e7]:
+    - generic [ref=f2e12]:
+      - heading "🚗 DriveGuard Lab" [level=2] [ref=f2e17]
+      - paragraph [ref=f2e22]: Detección de somnolencia y riesgo del conductor
+      - status [ref=f2e25]:
+        - generic [ref=f2e27]:
+          - generic [aria-hidden] [ref=f2e30]: ✅
+          - paragraph [ref=f2e32]: API conectada
+      - status [ref=f2e35]:
+        - generic [ref=f2e37]:
+          - generic [aria-hidden] [ref=f2e40]: 🗄️
+          - paragraph [ref=f2e42]: MongoDB conectado
+      - heading "Conductor" [level=3] [ref=f2e47]
+      - generic [ref=f2e49]:
+        - generic [ref=f2e50]:
+          - paragraph [ref=f2e53]: Conductor activo
+          - button "Help for Conductor activo" [ref=f2e57] [cursor=pointer]
+        - group [ref=f2e62]:
+          - combobox "Conductor activo" [ref=f2e63]: — Sin seleccionar —
+          - button "Open" [ref=f2e64] [cursor=pointer]
+      - button [ref=f2e70] [cursor=pointer]:
+        - paragraph [ref=f2e75]: ↻ Actualizar lista
+      - heading "Ubicación de la sesión" [level=3] [ref=f2e80]
+      - generic [ref=f2e82]:
+        - paragraph [ref=f2e86]: Descripción
+        - textbox "Descripción" [ref=f2e89]:
+          - /placeholder: Vía Pasto - Ipiales, km 12
+      - generic [ref=f2e91]:
+        - generic [ref=f2e95]:
+          - paragraph [ref=f2e99]: Latitud
+          - spinbutton "Latitud" [ref=f2e102]
+        - generic [ref=f2e106]:
+          - paragraph [ref=f2e110]: Longitud
+          - spinbutton "Longitud" [ref=f2e113]
+      - paragraph [ref=f2e118]: Se incluye en el mensaje de emergencia. En el prototipo se ingresa a mano.
+  - generic [ref=f2e4]:
+    - banner [ref=f2e121]:
+      - generic [ref=f2e124]:
+        - generic [ref=f2e296]:
+          - img "Running..." [ref=f2e297]
+          - button "Stop" [ref=f2e302] [cursor=pointer]
+        - button "Deploy" [ref=f2e134] [cursor=pointer]
+        - button "Main menu" [ref=f2e138] [cursor=pointer]
+    - main [ref=f2e5]:
+      - generic [ref=f2e142]:
+        - generic [ref=f2e147]:
+          - text: DRIVEGUARD / LABORATORIO DE CONDUCCIÓN
+          - heading "Tu atención, en tiempo real." [level=1] [ref=f2e149]:
+            - text: Tu atención, en tiempo real.
+            - generic [ref=f2e150]:
+              - link "Link to heading":
+                - /url: "#tu-atencion-en-tiempo-real"
+          - paragraph [ref=f2e151]: Calibra tu mirada, observa las señales de cansancio y consulta cada sesión desde un solo lugar.
+        - generic [ref=f2e153]:
+          - tablist [ref=f2e154]:
+            - tab [ref=f2e155] [cursor=pointer]:
+              - paragraph [ref=f2e157]: 👤 Conductor
+            - tab [active] [selected] [ref=f2e159] [cursor=pointer]:
+              - paragraph [ref=f2e161]: 🎯 Calibración EAR
+            - tab [ref=f2e162] [cursor=pointer]:
+              - paragraph [ref=f2e164]: 🎥 Monitoreo en vivo
+            - tab [ref=f2e165] [cursor=pointer]:
+              - paragraph [ref=f2e167]: 🎬 Video de prueba
+            - tab [ref=f2e168] [cursor=pointer]:
+              - paragraph [ref=f2e170]: 📊 Historial
+            - tab [ref=f2e171] [cursor=pointer]:
+              - paragraph [ref=f2e173]: ⚙️ Configuración
+          - tabpanel "🎯 Calibración EAR" [ref=f2e304]:
+            - generic [ref=f2e305]:
+              - heading "Calibración EAR" [level=3] [ref=f2e310]:
+                - text: Calibración EAR
+                - generic [ref=f2e311]:
+                  - link "Link to heading":
+                    - /url: "#calibracion-ear"
+              - paragraph [ref=f2e316]: Conoce tus seis puntos de referencia y prepara una medición personal.
+              - generic [ref=f2e318]:
+                - generic [ref=f2e322]:
+                  - heading "Laboratorio de seis puntos" [level=4] [ref=f2e328]:
+                    - text: Laboratorio de seis puntos
+                    - generic [ref=f2e329]:
+                      - link "Link to heading":
+                        - /url: "#laboratorio-de-seis-puntos"
+                  - paragraph [ref=f2e334]: Edita las coordenadas X/Y de P1–P6. El ojo y el EAR se actualizan con cada cambio.
+                  - generic [ref=f2e339]:
+                    - button "Show/hide columns" [ref=f2e343] [cursor=pointer]
+                    - button "Download as CSV" [ref=f2e349] [cursor=pointer]
+                    - button "Search" [ref=f2e355] [cursor=pointer]
+                    - button "Fullscreen" [ref=f2e361] [cursor=pointer]
+                  - paragraph [ref=f2e377]:
+                    - img "Ojo · 6 puntos" [ref=f2e378]:
+                      - generic [ref=f2e381]: P1
+                      - generic [ref=f2e383]: P2
+                      - generic [ref=f2e385]: P3
+                      - generic [ref=f2e387]: P4
+                      - generic [ref=f2e389]: P5
+                      - generic [ref=f2e391]: P6
+                  - generic [ref=f2e393]:
+                    - generic [ref=f2e398]:
+                      - paragraph [ref=f2e402]: EAR del dibujo
+                      - paragraph [ref=f2e405]: "0.400"
+                    - generic [ref=f2e410]:
+                      - paragraph [ref=f2e414]: Umbral ilustrativo
+                      - paragraph [ref=f2e417]: "0.300"
+                  - paragraph [ref=f2e422]: "Este dibujo es educativo: editarlo no modifica la detección ni calibra al conductor."
+                - generic [ref=f2e426]:
+                  - heading "Calibra con tu cámara" [level=4] [ref=f2e432]:
+                    - text: Calibra con tu cámara
+                    - generic [ref=f2e433]:
+                      - link "Link to heading":
+                        - /url: "#calibra-con-tu-camara"
+                  - list [ref=f2e438]:
+                    - listitem [ref=f2e439]: Selecciona el conductor en la barra lateral.
+                    - listitem [ref=f2e440]:
+                      - text: Abre
+                      - strong [ref=f2e441]: Monitoreo en vivo
+                      - text: e inicia la cámara con
+                      - strong [ref=f2e442]: START
+                      - text: .
+                    - listitem [ref=f2e443]: Mantén los ojos abiertos, el rostro de frente y buena iluminación.
+                    - listitem [ref=f2e444]:
+                      - text: Espera a que termine la barra de calibración. Usa
+                      - strong [ref=f2e445]: Recalibrar
+                      - text: si cambias de posición.
+                  - status [ref=f2e448]:
+                    - paragraph [ref=f2e452]: Los seis puntos se detectan automáticamente en cada ojo. La cámara muestra su posición real y el panel amplía su geometría.
+                  - heading "¿Qué mide el EAR?" [level=4] [ref=f2e458]:
+                    - text: ¿Qué mide el EAR?
+                    - generic [ref=f2e459]:
+                      - link "Link to heading":
+                        - /url: "#que-mide-el-ear"
+                  - generic [ref=f2e465]:
+                    - math [ref=f2e467]:
+                      - generic [ref=f2e469]:
+                        - generic [ref=f2e470]: E
+                        - generic [ref=f2e471]: A
+                        - generic [ref=f2e472]: R
+                        - generic [ref=f2e473]: =
+                        - generic [ref=f2e474]:
+                          - generic [ref=f2e475]:
+                            - generic [ref=f2e476]: ∥
+                            - generic [ref=f2e477]:
+                              - generic [ref=f2e478]: P
+                              - generic [ref=f2e479]: "2"
+                            - generic [ref=f2e480]: −
+                            - generic [ref=f2e481]:
+                              - generic [ref=f2e482]: P
+                              - generic [ref=f2e483]: "6"
+                            - generic [ref=f2e484]: ∥
+                            - generic [ref=f2e485]: +
+                            - generic [ref=f2e486]: ∥
+                            - generic [ref=f2e487]:
+                              - generic [ref=f2e488]: P
+                              - generic [ref=f2e489]: "3"
+                            - generic [ref=f2e490]: −
+                            - generic [ref=f2e491]:
+                              - generic [ref=f2e492]: P
+                              - generic [ref=f2e493]: "5"
+                            - generic [ref=f2e494]: ∥
+                          - generic [ref=f2e495]:
+                            - generic [ref=f2e496]: "2"
+                            - generic [ref=f2e497]: ∥
+                            - generic [ref=f2e498]:
+                              - generic [ref=f2e499]: P
+                              - generic [ref=f2e500]: "1"
+                            - generic [ref=f2e501]: −
+                            - generic [ref=f2e502]:
+                              - generic [ref=f2e503]: P
+                              - generic [ref=f2e504]: "4"
+                            - generic [ref=f2e505]: ∥
+                    - generic [aria-hidden] [ref=f2e506]:
+                      - generic [ref=f2e507]: EAR =
+                      - generic [ref=f2e513]:
+                        - generic [ref=f2e514]:
+                          - text: 2∥
+                          - generic [ref=f2e515]:
+                            - text: P
+                            - generic [ref=f2e516]: "1"
+                          - text: −
+                          - generic [ref=f2e524]:
+                            - text: P
+                            - generic [ref=f2e525]: "4"
+                          - text: ∥
+                        - generic [ref=f2e534]:
+                          - text: ∥
+                          - generic [ref=f2e535]:
+                            - text: P
+                            - generic [ref=f2e536]: "2"
+                          - text: −
+                          - generic [ref=f2e544]:
+                            - text: P
+                            - generic [ref=f2e545]: "6"
+                          - text: ∥ + ∥
+                          - generic [ref=f2e553]:
+                            - text: P
+                            - generic [ref=f2e554]: "3"
+                          - text: −
+                          - generic [ref=f2e562]:
+                            - text: P
+                            - generic [ref=f2e563]: "5"
+                          - text: ∥
+                  - paragraph [ref=f2e578]: "P1 y P4: extremos del ojo. P2 y P3: párpado superior. P5 y P6: párpado inferior. Al cerrar el ojo, disminuye la distancia vertical."
+                  - heading "Ajustes de la próxima calibración" [level=4] [ref=f2e584]:
+                    - text: Ajustes de la próxima calibración
+                    - generic [ref=f2e585]:
+                      - link "Link to heading":
+                        - /url: "#ajustes-de-la-proxima-calibracion"
+                  - generic [ref=f2e588]:
+                    - generic [ref=f2e591]:
+                      - paragraph [ref=f2e595]: Duración (segundos)
+                      - group "Duración (segundos)" [ref=f2e596]:
+                        - generic [ref=f2e597]:
+                          - generic [ref=f2e598]:
+                            - slider "Duración (segundos) Duración (segundos)" [ref=f2e600]: "10"
+                            - generic:
+                              - generic:
+                                - paragraph: "10"
+                          - generic:
+                            - generic:
+                              - paragraph: "1"
+                            - generic:
+                              - paragraph: "30"
+                    - generic [ref=f2e603]:
+                      - paragraph [ref=f2e607]: Factor del EAR base
+                      - group "Factor del EAR base" [ref=f2e608]:
+                        - generic [ref=f2e609]:
+                          - generic [ref=f2e610]:
+                            - slider "Factor del EAR base Factor del EAR base" [ref=f2e612]: "0.75"
+                            - generic:
+                              - generic:
+                                - paragraph: "0.75"
+                          - generic:
+                            - generic:
+                              - paragraph: "0.50"
+                            - generic:
+                              - paragraph: "0.95"
+                    - button [ref=f2e616] [cursor=pointer]:
+                      - paragraph [ref=f2e621]: Guardar ajustes de calibración
+        - separator [ref=f2e626]
+        - alert [ref=f2e629]:
+          - generic [ref=f2e631]:
+            - generic [aria-hidden] [ref=f2e634]: ⚠️
+            - paragraph [ref=f2e636]:
+              - strong [ref=f2e637]: Prototipo académico.
+              - text: "No sustituye sistemas de seguridad vehicular certificados. No lo use mientras conduce en vía pública: las pruebas se hacen con el vehículo detenido o en simulación. Las expresiones faciales son apariencias, no emociones reales."
