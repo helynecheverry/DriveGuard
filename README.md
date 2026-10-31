@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚗 DriveGuard Lab
 
 ### Detección de somnolencia y riesgo del conductor con visión por computador
@@ -544,3 +545,7 @@ Si el video va lento: suba `EXPRESION_INTERVALO_S` (por ejemplo, a 4 s), desacti
 ---
 
 <sub>DriveGuard Lab · Curso Deep Learning y Agentes Inteligentes · Ing. Julián René Muñoz Burbano · 2026</sub>
+=======
+# DriveGuard
+Diseñar, implementar y evaluar un sistema de visión por computador que detecte señales de somnolencia y distracción en un conductor
+>>>>>>> 5076cd04949c6ee46371b5d0558bad55fbbf29e5
